@@ -88,7 +88,7 @@ export const Login: React.FC = () => {
                             <input 
                                 type="text"
                                 className="w-full bg-[#1a1141] rounded-lg p-2.5 md:p-3 border border-gray-700 focus:border-purple-500 focus:outline-none text-sm md:text-base"
-                                placeholder="Enter username or email"
+                                placeholder="Enter email"
                                 name="email"
                                 onChange={handleChange}
                             />

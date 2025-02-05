@@ -19,7 +19,6 @@ export const AdminDeposits: React.FC = () => {
     const [deposits, setDeposits] = useState<Deposit[]>([]);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    // const [success, setSuccess] = useState<string>("");
     const apiUrl = import.meta.env.VITE_API_URL;
 
     // const handleStatusUpdate = (depositId: string, newStatus: 'approved' | 'declined') => {
