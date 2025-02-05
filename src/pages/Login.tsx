@@ -31,6 +31,7 @@ export const Login: React.FC = () => {
         try {
             setLoading(true);
             const response = await axios.post(`${apiUrl}/login`, loginInfo);
+            setLoading(false);
             setSuccess(response.data.msg);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('currentUser', JSON.stringify(response.data.userWithoutPassword));
