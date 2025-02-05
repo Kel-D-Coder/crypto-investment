@@ -84,7 +84,7 @@ export const Login: React.FC = () => {
                     <h2 className="text-xl md:text-2xl font-bold mb-6">Login</h2>
                     <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                         <div>
-                            <label className="block text-sm text-gray-400 mb-1 md:mb-2">Username or Email</label>
+                            <label className="block text-sm text-gray-400 mb-1 md:mb-2">Email</label>
                             <input 
                                 type="text"
                                 className="w-full bg-[#1a1141] rounded-lg p-2.5 md:p-3 border border-gray-700 focus:border-purple-500 focus:outline-none text-sm md:text-base"
