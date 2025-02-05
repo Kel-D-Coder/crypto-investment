@@ -41,6 +41,8 @@ export const Deposit: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError('');
+        setSuccess('');
 
         if (!selectedFile) {
             alert('Please select a proof of payment file');

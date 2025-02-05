@@ -28,15 +28,13 @@ export const AdminDeposits: React.FC = () => {
     const handleStatusUpdate = async (depositId: string, status: 'approved' | 'declined', userId : string, amount: number, wallet: string) => {
         try {
             // Replace with your actual API endpoint
-            const response = await axios.put(`${apiUrl}/users/${userId}/amount`, {
+            await axios.put(`${apiUrl}/users/${userId}/amount`, {
                 amount,
                 status,
                 wallet
             });
 
             // setSuccess(response.data.msg);
-
-            console.log(response.data.msg);
             
             // Update local state
             setDeposits(deposits.map(deposit => deposit._id === depositId ? { ...deposit, status: status } : deposit ));
@@ -64,13 +62,17 @@ export const AdminDeposits: React.FC = () => {
     }, [apiUrl]);
 
     return (
-        <div className="p-2 sm:p-4 lg:p-6  h-screen">
+        <div className="p-2 sm:p-4 lg:p-6">
             <div className="bg-[#130b2f] rounded-xl p-3 sm:p-4 lg:p-6">
                 <h1 className="text-xl text-white sm:text-2xl lg:text-3xl font-bold mb-6">Deposit Management</h1>
 
                 {isLoading ? (
                     <div className="text-center py-8">
                         <Loader />
+                    </div>
+                ) : deposits.length === 0 ? (
+                    <div className="text-center py-8 text-gray-400">
+                        No deposits yet
                     </div>
                 ) : (
                     <div className="overflow-x-auto">

@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Loader } from '../components/Loader';
+
+interface IUserData {
+    plan: string;
+}
 
 export const Withdraw: React.FC = () => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -9,6 +13,8 @@ export const Withdraw: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [success, setSuccess] = useState<string>('');
+    const [userData, setUserData] = useState<IUserData>();
+    const [planError, setPlanError] = useState<string>('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -22,6 +28,12 @@ export const Withdraw: React.FC = () => {
             setLoading(true);
             setError('');
             setSuccess('');
+            setPlanError('');
+
+            if (userData?.plan !== 'diamond') {
+                setPlanError('Upgrade your plan to diamond in other to withdraw');
+                return;
+            }
 
             const response = await axios.post(`${apiUrl}/withdraw`, {
                 wallet: method,
@@ -32,9 +44,12 @@ export const Withdraw: React.FC = () => {
                 }
             });
 
+
             setSuccess(response.data.msg);
             setAmount('');
             setMethod('');
+            setPlanError('');
+
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 setError(error.response?.data?.msg || 'An error occurred during withdrawal');
@@ -46,7 +61,17 @@ export const Withdraw: React.FC = () => {
         }
     };
 
-    console.log(method)
+    useEffect(() => {
+        const fetchUser = async () => {
+            const response = await axios.get(`${apiUrl}/users/info`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            setUserData(response.data);
+        }
+        fetchUser();
+    }, [apiUrl]);
 
     return (
         <div className="p-4 sm:p-6 lg:p-8">
@@ -95,7 +120,7 @@ export const Withdraw: React.FC = () => {
                         >
                             {loading ? <Loader /> : "Submit"}
                         </button>
-
+                        <p className="text-red-500 text-center">{planError}</p>
                         {error && <p className="text-red-500 text-center">{error}</p>}
                         {success && <p className="text-green-500 text-center">{success}</p>}
                     </form>

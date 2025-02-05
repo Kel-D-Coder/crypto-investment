@@ -5,6 +5,7 @@ import {InvestmentPlans} from "../components/InvestmentPlan.tsx";
 import { NavBar } from '../components/NavBar.tsx';
 import { WorkProcess } from '../components/WorkProcess';
 import { useNavigate } from 'react-router-dom';
+import { FAQSection } from '../components/FAQSection';
 
 export const HomePage: React.FC = () => {
     const navigate = useNavigate();
@@ -38,6 +39,7 @@ export const HomePage: React.FC = () => {
                 <InvestmentPlans />
                 <AffiliateSection />
                 <WorkProcess />
+                <FAQSection />
             </div>
         </>
     )
