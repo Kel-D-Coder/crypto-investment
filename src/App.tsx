@@ -12,6 +12,8 @@ import { AdminDeposits } from './pages/admin/Deposits'
 import { AdminProtectedRoute, ProtectedRoute } from './components/ProtectedRoute'
 import { Withdraw } from './pages/Withdraw'
 import { useScrollToTop } from './hooks/useScrollToTop'
+import { ForgotPassword } from './pages/ForgotPassword'
+import { ResetPassword } from './pages/ResetPassword'
 
 function App() {
     return (
@@ -43,6 +45,8 @@ function App() {
                         </AdminProtectedRoute>
                     }
                 />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password/:token" element={<ResetPassword />} />
             </Routes>
             <Footer />
         </Router>

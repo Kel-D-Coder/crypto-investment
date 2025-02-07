@@ -122,6 +122,14 @@ export const Login: React.FC = () => {
                                     )}
                                 </button>
                             </div>
+                            <div className="flex justify-end">
+                                <Link 
+                                    to="/forgot-password" 
+                                    className="text-sm text-gray-400 hover:text-purple-400"
+                                >
+                                    Forgot Password?
+                                </Link>
+                            </div>
                         </div>
 
                         <button 
