@@ -23,14 +23,6 @@ export const DashboardContent: React.FC = () => {
 
     return (
         <>
-            <section className="bg-[#130b2f] p-3 md:p-4 rounded-lg mb-4 md:mb-6">
-                <h2 className="text-lg font-bold text-white mb-2">Holiday</h2>
-                <p className="text-gray-300 text-sm md:text-base">
-                    Today is holiday on this system. You'll not get any interest today from this system. 
-                    Also you're unable to make withdrawal request today. The next working day is coming after 
-                    <span className="text-blue-400 ml-1">1d 13h 43m 30s</span>
-                </p>
-            </section>
 
             <section className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 mb-4 md:mb-6">
                 <div className="bg-[#130b2f] p-3 md:p-4 rounded-lg">
