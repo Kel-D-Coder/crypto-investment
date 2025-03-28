@@ -2,106 +2,132 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../hooks/useAuth';
 
-
 export const NavBar: React.FC = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
-
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
+    const isAdmin = JSON.parse(localStorage.getItem('currentUser') || '{}').role === 'admin';
 
     const handleLogout = () => {
         localStorage.clear();
-        window.location.reload(); // Or use your routing logic
+        window.location.reload();
     };
 
     return (
-        <nav className="text-white shadow-md relative">
-            <div className="container mx-auto flex items-center justify-between p-4">
-                {/* Logo */}
-                <div className="text-2xl font-bold">Profitablefxtpro</div>
+        <nav className="relative z-50 border-b border-purple-500/20">
+            <div className="bg-[#1a1141]/80 backdrop-blur-xl">
+                <div className="max-w-7xl mx-auto px-6 md:px-8">
+                    <div className="flex items-center justify-between h-16 md:h-20">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                            <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">
+                                CryptoInvestment
+                            </h1>
+                        </div>
 
-                {/* Buttons */}
-                <div className="hidden md:flex space-x-4">
+                        {/* Desktop Navigation */}
+                        <div className="hidden md:flex items-center gap-4">
+                            {isAuthenticated ? (
+                                <>
+                                    <button 
+                                        onClick={() => navigate('/dashboard')}
+                                        className="bg-[#130b2f] hover:bg-[#1f1356] text-white px-6 py-2.5 rounded-xl font-medium transition-all transform hover:scale-[1.02] border border-purple-500/20"
+                                    >
+                                        Dashboard
+                                    </button>
+                                    {isAdmin && (
+                                        <button 
+                                            onClick={() => navigate('/admin/deposits')}
+                                            className="bg-[#130b2f] hover:bg-[#1f1356] text-white px-6 py-2.5 rounded-xl font-medium transition-all transform hover:scale-[1.02] border border-purple-500/20"
+                                        >
+                                            Admin
+                                        </button>
+                                    )}
+                                    <button 
+                                        onClick={handleLogout}
+                                        className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-2.5 rounded-xl font-medium transition-all transform hover:scale-[1.02]"
+                                    >
+                                        Logout
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <button 
+                                        onClick={() => navigate('/register')}
+                                        className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-2.5 rounded-xl font-medium transition-all transform hover:scale-[1.02]"
+                                    >
+                                        Register
+                                    </button>
+                                    <button 
+                                        onClick={() => navigate('/login')}
+                                        className="bg-[#130b2f] hover:bg-[#1f1356] text-white px-6 py-2.5 rounded-xl font-medium transition-all transform hover:scale-[1.02] border border-purple-500/20"
+                                    >
+                                        Login
+                                    </button>
+                                </>
+                            )}
+                        </div>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-[#130b2f] transition-colors"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {isMobileMenuOpen ? (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                ) : (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                )}
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile Menu */}
+            <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+                <div className="bg-[#130b2f] border-t border-purple-500/20 px-6 py-4 space-y-3">
                     {isAuthenticated ? (
                         <>
-                            <button className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/dashboard')}>
+                            <button 
+                                onClick={() => navigate('/dashboard')}
+                                className="w-full bg-[#1a1141] hover:bg-[#1f1356] text-white px-4 py-2.5 rounded-xl font-medium transition-colors text-left"
+                            >
                                 Dashboard
                             </button>
-                            <button className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer" onClick={handleLogout}>
+                            {isAdmin && (
+                                <button 
+                                    onClick={() => navigate('/admin/deposits')}
+                                    className="w-full bg-[#1a1141] hover:bg-[#1f1356] text-white px-4 py-2.5 rounded-xl font-medium transition-colors text-left"
+                                >
+                                    Admin
+                                </button>
+                            )}
+                            <button 
+                                onClick={handleLogout}
+                                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-2.5 rounded-xl font-medium transition-colors"
+                            >
                                 Logout
                             </button>
-                            {
-                                JSON.parse(localStorage.getItem('currentUser') || '{}').role === 'admin' && (
-                                    <button className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/admin/deposits')}>
-                                        Admin
-                                    </button>
-                                )
-                            }
                         </>
                     ) : (
                         <>
-                            <button className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/register')}>
+                            <button 
+                                onClick={() => navigate('/register')}
+                                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-2.5 rounded-xl font-medium transition-colors"
+                            >
                                 Register
                             </button>
-                            <button className="bg-transparent border border-purple-500 hover:bg-purple-700 hover:text-white px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/login')}>
+                            <button 
+                                onClick={() => navigate('/login')}
+                                className="w-full bg-[#1a1141] hover:bg-[#1f1356] text-white px-4 py-2.5 rounded-xl font-medium transition-colors"
+                            >
                                 Login
                             </button>
                         </>
                     )}
                 </div>
-
-                {/* Mobile Menu Toggle */}
-                <button
-                    className="md:hidden text-2xl focus:outline-none cursor-pointer"
-                    onClick={toggleMobileMenu}
-                >
-                    ☰
-                </button>
-            </div>
-
-            {/* Mobile Menu */}
-            <div
-                className={`${
-                    isMobileMenuOpen ? "block" : "hidden"
-                } md:hidden bg-blue-900 text-white absolute top-full left-0 w-full z-50`}
-            >
-                <ul className="flex flex-col items-center space-y-4 py-4">
-                    {/* <li className="hover:text-purple-300 cursor-pointer">Home</li>
-                    <li className="hover:text-purple-300 cursor-pointer">Plan</li>
-                    <li className="hover:text-purple-300 cursor-pointer">Blog</li>
-                    <li className="hover:text-purple-300 cursor-pointer">Contact</li> */}
-                    <div className="flex flex-col space-y-4 mt-4">
-                        {isAuthenticated ? (
-                            <>
-                                <button className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/dashboard')}>
-                                    Dashboard
-                                </button>
-                                <button className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer" onClick={handleLogout}>
-                                    Logout
-                                </button>
-                                {
-                                JSON.parse(localStorage.getItem('currentUser') || '{}').role === 'admin' && (
-                                    <button className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/admin/deposits')}>
-                                        Admin
-                                    </button>
-                                )
-                            }
-                            </>
-                        ) : (
-                            <>
-                                <button className="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/register')}>
-                                    Register
-                                </button>
-                                <button className="bg-transparent border border-purple-500 hover:bg-purple-700 hover:text-white px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/login')}>
-                                    Login
-                                </button>
-                            </>
-                        )}
-                    </div>
-                </ul>
             </div>
         </nav>
     );

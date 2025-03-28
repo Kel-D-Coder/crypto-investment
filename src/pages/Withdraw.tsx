@@ -44,7 +44,6 @@ export const Withdraw: React.FC = () => {
                 }
             });
 
-
             setSuccess(response.data.msg);
             setAmount('');
             setMethod('');
@@ -75,28 +74,39 @@ export const Withdraw: React.FC = () => {
 
     return (
         <div className="p-4 sm:p-6 lg:p-8">
-            <div className="bg-[#130b2f] rounded-xl p-4 sm:p-6 lg:p-8">
-                <h1 className="text-xl text-white sm:text-2xl lg:text-3xl font-bold mb-6 lg:mb-8">Withdraw Money</h1>
+            <div className="max-w-4xl mx-auto">
+                {/* Header */}
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent mb-8">
+                    Withdraw Funds
+                </h1>
 
-                <div className="bg-[#1a1141] rounded-xl p-4 sm:p-6 lg:p-8 mb-6 lg:mb-8">
+                {/* Withdrawal Form */}
+                <div className="bg-[#1a1141]/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-purple-500/20 shadow-2xl">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label className="block text-gray-300 mb-2">
-                                Method <span className="text-red-500">*</span>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">
+                                Select Wallet <span className="text-red-500">*</span>
                             </label>
-                            <select
-                                value={method}
-                                onChange={(e) => setMethod(e.target.value)}
-                                className="w-full bg-[#130b2f] rounded-lg p-3 border cursor-pointer border-gray-700 focus:border-purple-500 focus:outline-none text-white"
-                            >
-                                <option value="">Select Gateway</option>
-                                <option value="deposit">Deposit Wallet</option>
-                                <option value="interest">Interest Wallet</option>
-                            </select>
+                            <div className="relative">
+                                <select
+                                    value={method}
+                                    onChange={(e) => setMethod(e.target.value)}
+                                    className="w-full bg-[#130b2f] rounded-xl p-3.5 appearance-none border border-purple-500/20 focus:border-purple-500 focus:outline-none text-white"
+                                >
+                                    <option value="">Select Gateway</option>
+                                    <option value="deposit">Deposit Wallet</option>
+                                    <option value="interest">Interest Wallet</option>
+                                </select>
+                                <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
 
                         <div>
-                            <label className="block text-gray-300 mb-2">
+                            <label className="block text-sm font-medium text-gray-400 mb-2">
                                 Amount <span className="text-red-500">*</span>
                             </label>
                             <div className="flex">
@@ -104,10 +114,10 @@ export const Withdraw: React.FC = () => {
                                     type="number"
                                     value={amount}
                                     onChange={(e) => setAmount(e.target.value)}
-                                    className="flex-1 bg-[#130b2f] rounded-l-lg p-3 border border-gray-700 focus:border-purple-500 focus:outline-none text-white"
+                                    className="flex-1 bg-[#130b2f] rounded-l-xl p-3.5 border border-purple-500/20 focus:border-purple-500 focus:outline-none text-white"
                                     placeholder="Enter amount"
                                 />
-                                <span className="bg-purple-600 px-4 flex items-center justify-center rounded-r-lg font-medium text-white">
+                                <span className="bg-gradient-to-r from-purple-600 to-blue-600 px-4 flex items-center justify-center rounded-r-xl font-medium text-white">
                                     USD
                                 </span>
                             </div>
@@ -115,14 +125,27 @@ export const Withdraw: React.FC = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-lg font-medium transition-colors cursor-pointer"
+                            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-4 rounded-xl font-medium transition-all transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={loading}
                         >
-                            {loading ? <Loader /> : "Submit"}
+                            {loading ? <Loader /> : "Submit Withdrawal"}
                         </button>
-                        <p className="text-red-500 text-center">{planError}</p>
-                        {error && <p className="text-red-500 text-center">{error}</p>}
-                        {success && <p className="text-green-500 text-center">{success}</p>}
+
+                        {planError && (
+                            <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-400 text-center">
+                                {planError}
+                            </div>
+                        )}
+                        {error && (
+                            <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-400 text-center">
+                                {error}
+                            </div>
+                        )}
+                        {success && (
+                            <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 text-green-400 text-center">
+                                {success}
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>

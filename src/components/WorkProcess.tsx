@@ -4,45 +4,50 @@ const steps = [
     {
         number: "1",
         title: "Registration",
+        description: "Create your account in minutes",
         icon: (
-            <svg className="w-16 h-16 text-purple-600" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
             </svg>
         )
     },
     {
         number: "2",
         title: "Deposit",
+        description: "Fund your investment account",
         icon: (
-            <svg className="w-16 h-16 text-purple-600" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
         )
     },
     {
         number: "3",
         title: "Investing",
+        description: "Choose your investment plan",
         icon: (
-            <svg className="w-16 h-16 text-purple-600" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
             </svg>
         )
     },
     {
         number: "4",
         title: "Profit",
+        description: "Earn consistent returns",
         icon: (
-            <svg className="w-16 h-16 text-purple-600" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         )
     },
     {
         number: "5",
         title: "Withdraw",
+        description: "Cash out your earnings",
         icon: (
-            <svg className="w-16 h-16 text-purple-600" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z" />
             </svg>
         )
     }
@@ -50,36 +55,65 @@ const steps = [
 
 export const WorkProcess: React.FC = () => {
     return (
-        <section className="bg-[#0a061f] text-white py-16 px-6 md:px-20">
-            <div className="text-center mb-16">
-                <div className="bg-purple-600 text-sm inline-block px-4 py-1 rounded-full mb-4">
-                    WORK PROCESS
-                </div>
-                <h2 className="text-4xl font-bold">5 Simple Steps to Start Investing</h2>
+        <section className="relative overflow-hidden py-24 px-6 md:px-20">
+            {/* Background Elements */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0a061f] to-[#130b2f]">
+                <div className="absolute w-96 h-96 bg-purple-600/10 rounded-full blur-3xl top-20 -left-20 animate-pulse"></div>
+                <div className="absolute w-96 h-96 bg-blue-600/10 rounded-full blur-3xl bottom-20 -right-20 animate-pulse delay-1000"></div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                {steps.map((step, index) => (
-                    <div 
-                        key={step.number}
-                        className="relative flex flex-col items-center"
-                    >
-                        <div className="bg-[#130b2f] rounded-2xl p-8 flex flex-col items-center w-full aspect-square hover:scale-105 transition-transform">
-                            {step.icon}
-                            <h3 className="text-xl font-bold mt-4">{step.title}</h3>
+            <div className="relative max-w-7xl mx-auto">
+                {/* Header */}
+                <div className="text-center mb-16">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/20 mb-4">
+                        <span className="text-sm font-semibold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                            WORK PROCESS
+                        </span>
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Start Investing in 5 Simple Steps
+                    </h2>
+                    <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                        Begin your investment journey with our straightforward process
+                    </p>
+                </div>
+
+                {/* Steps */}
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                    {steps.map((step, index) => (
+                        <div 
+                            key={step.number}
+                            className="relative group"
+                        >
+                            {/* Connection line */}
+                            {index < steps.length - 1 && (
+                                <div className="hidden lg:block absolute top-1/2 -right-4 w-8">
+                                    <div className="h-0.5 w-full bg-gradient-to-r from-purple-500 to-blue-500 transform translate-y-px"></div>
+                                </div>
+                            )}
+
+                            <div className="bg-[#1a1141]/50 backdrop-blur-xl rounded-2xl p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 group-hover:transform group-hover:scale-[1.02]">
+                                {/* Step number */}
+                                <div className="bg-gradient-to-r from-purple-600 to-blue-600 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white mb-6">
+                                    {step.number}
+                                </div>
+
+                                {/* Icon */}
+                                <div className="text-purple-400 group-hover:text-purple-300 transition-colors mb-4">
+                                    {step.icon}
+                                </div>
+
+                                {/* Content */}
+                                <h3 className="text-xl font-bold text-white mb-2">
+                                    {step.title}
+                                </h3>
+                                <p className="text-gray-400">
+                                    {step.description}
+                                </p>
+                            </div>
                         </div>
-                        
-                        {/* Connection line */}
-                        {index < steps.length - 1 && (
-                            <div className="hidden lg:block absolute top-1/2 -right-4 w-8 border-t-2 border-dashed border-purple-600" />
-                        )}
-                        
-                        {/* Step number */}
-                        <div className="absolute -top-4 left-4 bg-purple-600 w-8 h-8 rounded-full flex items-center justify-center font-bold">
-                            {step.number}
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </section>
     );

@@ -8,7 +8,7 @@ export const Deposit: React.FC = () => {
     const location = useLocation();
     const { amount, wallet, planName } = location.state || { amount: 0, wallet: 'deposit', planName: 'Investment' };
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [btcAddress] = useState('1KCTNPNxyGGDs2jSD78n5xzogzaNCoUDAP');
+    const [btcAddress] = useState('bc1qsrvjmzs2sut9txgkv3tcgukt839tfelhz5xegk');
     const [btcAmount, setBtcAmount] = useState<string>('0');
     const [isLoading, setIsLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
@@ -104,81 +104,127 @@ export const Deposit: React.FC = () => {
 
     return (
         <div className="p-4 sm:p-6 lg:p-8">
-            {
-                amount === 0 && <p className="text-red-500 text-center">Please select an investment plan and deposit</p>
-            }
-            <div className="bg-[#130b2f] rounded-xl p-4 sm:p-6 lg:p-8">
-                <h1 className="text-xl text-white sm:text-2xl lg:text-3xl font-bold mb-6 lg:mb-8">Deposit Confirm</h1>
+            <div className="max-w-4xl mx-auto">
+                {/* Header Section */}
+                <div className="mb-8">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent mb-2">
+                        Confirm Deposit
+                    </h1>
+                    <p className="text-gray-400">Complete your investment deposit securely</p>
+                </div>
 
-                <div className="bg-[#1a1141] rounded-xl p-4 sm:p-6 lg:p-8 mb-6 lg:mb-8">
-                    <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold">{wallet} Payment</h2>
+                {amount === 0 && (
+                    <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-6 text-red-400 text-center">
+                        Please select an investment plan and deposit amount first
+                    </div>
+                )}
 
-                    <p className="text-gray-300">
-                        You have requested to invest <span className="text-green-500">${amount.toFixed(2)} USD</span> in {planName} plan
-                        using your {wallet} wallet. Please pay{' '}
-                        {isLoading ? (
-                            <span>Loading...</span>
-                        ) : (
-                            <span className="text-green-500">{btcAmount} BTC</span>
-                        )}{' '}
-                        for successful payment
-                    </p>
-
-                    <div>
-                        <p className="text-gray-300 mb-2">Send the exact amount to the Bitcoin wallet address:</p>
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                            <code className="bg-white p-3 rounded-lg flex-1 text-sm overflow-auto">
-                                {btcAddress}
-                            </code>
-                            <button 
-                                onClick={() => copyToClipboard(btcAddress)}
-                                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors cursor-pointer"
-                            >
-                                Copy Address
-                            </button>
+                <div className="bg-[#130b2f]/80 backdrop-blur-xl rounded-2xl p-6 lg:p-8 shadow-2xl border border-purple-500/20">
+                    {/* Investment Summary */}
+                    <div className="bg-[#1a1141]/50 rounded-xl p-6 mb-8">
+                        <h2 className="text-xl font-semibold text-white mb-4">Investment Summary</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <p className="text-gray-400 text-sm mb-1">Amount (USD)</p>
+                                <p className="text-2xl font-bold text-white">${amount.toFixed(2)}</p>
+                            </div>
+                            <div>
+                                <p className="text-gray-400 text-sm mb-1">Amount (BTC)</p>
+                                <p className="text-2xl font-bold text-white">
+                                    {isLoading ? (
+                                        <span className="text-gray-500">Calculating...</span>
+                                    ) : (
+                                        <>{btcAmount} BTC</>
+                                    )}
+                                </p>
+                            </div>
+                            <div>
+                                <p className="text-gray-400 text-sm mb-1">Selected Plan</p>
+                                <p className="text-lg font-medium text-white">{planName}</p>
+                            </div>
+                            <div>
+                                <p className="text-gray-400 text-sm mb-1">Payment Method</p>
+                                <p className="text-lg font-medium text-white capitalize">{wallet}</p>
+                            </div>
                         </div>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                    {/* Payment Instructions */}
+                    <div className="space-y-6">
                         <div>
-                            <label className="block text-gray-300 mb-2">
-                                Screenshot or Proof Of Payment <span className="text-red-500">*</span>
-                            </label>
-                            <div className="space-y-2">
-                                <input
-                                    type="file"
-                                    accept=".jpg,.jpeg,.png"
-                                    onChange={handleFileChange}
-                                    className="hidden"
-                                    id="proof-file"
-                                />
-                                <label
-                                    htmlFor="proof-file"
-                                    className="block w-full bg-purple-600 hover:bg-purple-700 text-white text-center py-3 rounded-lg cursor-pointer transition-colors"
+                            <h3 className="text-lg font-medium text-white mb-4">
+                                Send Payment to Bitcoin Address
+                            </h3>
+                            <div className="bg-[#1a1141]/50 rounded-xl p-4 flex flex-col sm:flex-row items-center gap-4">
+                                <code className="font-mono bg-black/30 p-3 rounded-lg flex-1 text-sm break-all text-gray-300">
+                                    {btcAddress}
+                                </code>
+                                <button 
+                                    onClick={() => copyToClipboard(btcAddress)}
+                                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg transition-all transform hover:scale-[1.02] cursor-pointer flex items-center gap-2"
                                 >
-                                    Upload Proof of Payment
-                                </label>
-                                {selectedFile && (
-                                    <p className="text-sm text-gray-400">
-                                        Selected: {selectedFile.name}
-                                    </p>
-                                )}
-                                <p className="text-xs text-purple-400">
-                                    Supported formats: jpg, jpeg, png
-                                </p>
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                    Copy Address
+                                </button>
                             </div>
                         </div>
 
-                        <button
-                            type="submit"
-                            className="w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-lg font-medium transition-colors cursor-pointer"
-                            disabled={uploading}
-                        >
-                            {uploading ? <Loader /> : "Pay Now"}
-                        </button>
-                        {success && <p className="text-green-500 text-center">{success}</p>}
-                        {error && <p className="text-red-500 text-center">{error}</p>}
-                    </form>
+                        {/* Upload Proof */}
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <h3 className="text-lg font-medium text-white mb-4">
+                                    Upload Payment Proof
+                                </h3>
+                                <div className="bg-[#1a1141]/50 rounded-xl p-6">
+                                    <input
+                                        type="file"
+                                        accept=".jpg,.jpeg,.png"
+                                        onChange={handleFileChange}
+                                        className="hidden"
+                                        id="proof-file"
+                                    />
+                                    <label
+                                        htmlFor="proof-file"
+                                        className="block w-full border-2 border-dashed border-purple-500/50 rounded-xl p-8 text-center cursor-pointer hover:border-purple-500 transition-colors"
+                                    >
+                                        <div className="space-y-2">
+                                            <svg className="w-10 h-10 mx-auto text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            <p className="text-gray-300">Click to upload proof of payment</p>
+                                            <p className="text-purple-500 text-sm">Supported: JPG, JPEG, PNG</p>
+                                        </div>
+                                    </label>
+                                    {selectedFile && (
+                                        <p className="mt-4 text-sm text-gray-400 text-center">
+                                            Selected: {selectedFile.name}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={uploading || !selectedFile}
+                                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-4 rounded-xl font-medium transition-all transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                            >
+                                {uploading ? <Loader /> : "Confirm Payment"}
+                            </button>
+
+                            {success && (
+                                <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 text-green-400 text-center">
+                                    {success}
+                                </div>
+                            )}
+                            {error && (
+                                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-400 text-center">
+                                    {error}
+                                </div>
+                            )}
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
