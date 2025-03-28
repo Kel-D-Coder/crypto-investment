@@ -29,7 +29,7 @@ export const HomePage: React.FC = () => {
                                 Unleash Your Financial Potential
                             </h1>
                             <p className="text-gray-300 text-lg md:text-xl">
-                                Join thousands of investors making smart decisions with Profitablefxtpro
+                                Join thousands of investors making smart decisions with CryptoInc
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                                 <button 
