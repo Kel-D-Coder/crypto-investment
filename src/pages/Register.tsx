@@ -226,7 +226,6 @@ export const Register: React.FC = () => {
             setLoading(false);
             setSuccess('');
             if (axios.isAxiosError(error)) {
-                console.log(error)
                 setError(error.response?.data?.msg || 'An error occurred during registration');
             } else {
                 setError('An unexpected error occurred');
